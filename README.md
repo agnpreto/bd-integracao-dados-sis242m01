@@ -1,8 +1,9 @@
 # Integração de Dados: implantação, consultas e validação
 
 **Disciplina:** Banco de Dados (SIS242M01)  
-**Trabalho:** individual  
-**Prazo:** dd/mm/aaaa
+**Trabalho:** individual ou em dupla (à escolha do aluno)  
+**Prazo de entrega:** 24/11/2026
+
 
 **Nome da dupla:** Mikael Coelho Ramos e Kauã Monteiro Coelho
 
@@ -10,9 +11,19 @@
 | --- | --- | --- |
 |  Mikael Coelho Ramos e Kauã Monteiro Coelho|  2388326 - 2533406|  mikaelrms e Kauaks|
 
+## Equipe
+
+**Nome da dupla:** ____________________ (deixe em branco se for individual)
+
+| Nome | Matrícula | Usuário do GitHub |
+| --- | --- | --- |
+|  |  |  |
+|  |  |  |
+
+
 ## O cenário
 
-Você foi contratado para implantar o banco de dados de uma rede de lojas. O cliente enviou:
+Você (ou sua dupla) foi contratado para implantar o banco de dados de uma rede de lojas. O cliente enviou:
 
 - a planilha `dados/base_teste.xlsx`, com 5 abas: `venda`, `pedido_compra`, `entradas_mercadoria`, `produtos_filial` e `fornecedor`;
 - o DDL das tabelas, em `sql/01_ddl_enunciado.sql`;
@@ -80,12 +91,11 @@ sql/04_validacao.sql                Parte 4
 
 ## Como entregar
 
-1. Logado no GitHub, clique em **Fork** (canto superior direito) e depois em **Create fork**. O fork é a sua cópia individual.
-2. No fork, preencha a tabela **Aluno** no topo deste README: clique em `README.md`, depois no lápis ✏️, e em **Commit changes**.
-3. Clone o fork (`git clone <link-do-seu-fork>`) e faça o trabalho nele, com **pelo menos 5 commits** ao longo das etapas.
-4. **Não coloque senha real** no `importar.py`: use variável de ambiente ou deixe um valor de exemplo.
-5. Para entregar, no fork clique em **Contribute → Open pull request**, preencha o modelo e clique em **Create pull request**. Cada novo `git push` atualiza o mesmo Pull Request até o prazo.
+1. Logado no GitHub, clique em **Fork** (canto superior direito) e depois em **Create fork**. **Individual:** você faz o seu fork. **Dupla:** só um dos dois faz o fork; o outro **não** faz.
+2. **Só para dupla:** no fork, vá em **Settings → Collaborators → Add people** e adicione o colega pelo usuário do GitHub. O colega aceita o convite que chega por e-mail.
+3. **Logo no início**, preencha no fork a tabela **Equipe** no topo deste README (uma linha se for individual, duas se for dupla, e o **nome da dupla** se for o caso): clique em `README.md`, depois no lápis ✏️, e em **Commit changes**. Não apague a linha `| --- | --- | --- |` da tabela. É por ela que a lista de equipes (`EQUIPES.md`) é montada.
+4. Clone o fork (`git clone <link-do-fork>`) e trabalhe nele. **Individual:** pelo menos 5 commits. **Dupla:** cada integrante com pelo menos 3 commits.
+5. **Não coloque senha real** no `importar.py`: use variável de ambiente ou deixe um valor de exemplo.
+6. Para entregar, abra o fork, clique em **Contribute → Open pull request**, preencha o modelo e clique em **Create pull request**. Cada novo `git push` atualiza o mesmo Pull Request até o prazo, **24/11/2026**.
 
-⚠️ Não edite o repositório do professor, só o seu fork.
-
-
+⚠️ Não edite o repositório do professor, só o fork. Um Pull Request por aluno individual ou por dupla.

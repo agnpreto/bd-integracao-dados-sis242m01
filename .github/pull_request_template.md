@@ -1,7 +1,11 @@
-## Aluno
+## Equipe
 
-**Nome:** 
-**Matrícula:** 
+**Nome da dupla (se for dupla):** 
+
+| Nome | Matrícula | Usuário do GitHub |
+| --- | --- | --- |
+|  |  |  |
+|  |  |  |
 
 ## Conferência da importação
 
@@ -20,4 +24,4 @@
 - [ ] Consultas da Parte 2
 - [ ] Transformações e trigger da Parte 3
 - [ ] Roteiro de validação e lista de erros em `docs/parte4_validacao.md`
-- [ ] Pelo menos 5 commits
+- [ ] Individual: pelo menos 5 commits / Dupla: cada integrante com pelo menos 3 commits
