@@ -4,11 +4,11 @@
 **Trabalho:** individual  
 **Prazo:** dd/mm/aaaa
 
-## Aluno
+**Nome da dupla:** Mikael Coelho Ramos e Kauã Monteiro Coelho
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  Mikael Coelho Ramos|  2388326|  mikaelrms|
+|  Mikael Coelho Ramos e Kauã Monteiro Coelho|  2388326 - 2533406|  mikaelrms e Kauaks|
 
 ## O cenário
 
