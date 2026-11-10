@@ -10,8 +10,9 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Carlos Alencar | 2400784 | xandealencar-S |
+| Carlos Vasconcelos | 2385765 | Carlos-VasconceloS |
+
 
 ## O cenário
 
