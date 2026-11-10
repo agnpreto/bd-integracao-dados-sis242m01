@@ -6,12 +6,13 @@
 
 ## Equipe
 
-**Nome da dupla:** ____________________ (deixe em branco se for individual)
+**Nome da dupla:** Mikael Coelho Ramos e Kauã Monteiro Coelho
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+|  Mikael Coelho Ramos|  2388326|  mikaelrms|
+|  Kauã Monteiro Coelho|  2533406|  Kauaks|
+
 
 ## O cenário
 
