@@ -4,21 +4,14 @@
 **Trabalho:** individual ou em dupla (à escolha do aluno)  
 **Prazo de entrega:** 24/11/2026
 
+## Equipe
 
 **Nome da dupla:** Mikael Coelho Ramos e Kauã Monteiro Coelho
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  Mikael Coelho Ramos e Kauã Monteiro Coelho|  2388326 - 2533406|  mikaelrms e Kauaks|
-
-## Equipe
-
-**Nome da dupla:** ____________________ (deixe em branco se for individual)
-
-| Nome | Matrícula | Usuário do GitHub |
-| --- | --- | --- |
-|  |  |  |
-|  |  |  |
+|  Mikael Coelho Ramos|  2388326|  mikaelrms|
+|  Kauã Monteiro Coelho|  2533406|  Kauaks|
 
 
 ## O cenário
