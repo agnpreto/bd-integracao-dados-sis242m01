@@ -2,39 +2,40 @@ import pandas as pd
 import psycopg2
 from datetime import datetime, timedelta
 
-# ── Configurações ──────────────────────────────────────────
-ARQUIVO = "dados/base_teste.xlsx"  #trocar caminho do dataset dos Senhores
+ARQUIVO = "dados/base_teste.xlsx"
 DB = {
-    "host": "localhost", #de acordo com o host do SGBD dos Senhores
-    "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3006
-    "database": "postgres", #nome da data base do Senhores
-    "user": "postgres",   #utilizador dos senhores 
-    "password": "1234"   #senha do utilizador
+    "host": "localhost",
+    "port": 5432,
+    "database": "postgres",
+    "user": "postgres",
+    "password": "1234"
 }
 
-# ── Converte serial do Excel para data ─────────────────────
 def excel_para_data(valor):
-    try:
-        if pd.isna(valor):
-            return None
-        return (datetime(1899, 12, 30) + timedelta(days=int(valor))).date()
-    except:
+    if pd.isna(valor):
         return None
+    if isinstance(valor, datetime):
+        return valor.date()
+    if hasattr(valor, "date"):
+        return valor.date()
+    try:
+        return (datetime(1899, 12, 30) + timedelta(days=int(float(valor)))).date()
+    except Exception:
+        try:
+            return pd.to_datetime(valor, dayfirst=True).date()
+        except Exception:
+            return None
 
-# ── Conecta no banco ───────────────────────────────────────
 print("Conectando no PostgreSQL...")
 conn = psycopg2.connect(**DB)
 cur = conn.cursor()
 print("Conectado!\n")
 
-
-
 # 1. FORNECEDOR
-
 print("Importando fornecedor...")
 df = pd.read_excel(ARQUIVO, sheet_name="fornecedor")
 df.columns = df.columns.str.strip()
-
+inseridos = 0
 for _, row in df.iterrows():
     try:
         cur.execute("""
@@ -45,21 +46,19 @@ for _, row in df.iterrows():
             str(row["idfornecedor"]).strip(),
             str(row["razao_social"]).strip()
         ))
+        inseridos += cur.rowcount
     except Exception as e:
         print(f"  Erro fornecedor: {e}")
         conn.rollback()
         continue
-
 conn.commit()
-print(f"  {len(df)} registros inseridos em fornecedor \n")
-
+print(f"  {inseridos} de {len(df)} registros inseridos em fornecedor\n")
 
 # 2. PRODUTOS_FILIAL
-
 print("Importando produtos_filial...")
 df = pd.read_excel(ARQUIVO, sheet_name="produtos_filial")
 df.columns = df.columns.str.strip()
-
+inseridos = 0
 for _, row in df.iterrows():
     try:
         cur.execute("""
@@ -78,26 +77,22 @@ for _, row in df.iterrows():
             float(row["preco_venda"]) if pd.notna(row["preco_venda"]) else 0,
             str(row["idfornecedor"]).strip() if pd.notna(row["idfornecedor"]) else None
         ))
+        inseridos += cur.rowcount
     except Exception as e:
         print(f"  Erro produtos_filial linha {_}: {e}")
         conn.rollback()
         continue
-
 conn.commit()
-print(f"  {len(df)} registros inseridos em produtos_filial \n")
-
+print(f"  {inseridos} de {len(df)} registros inseridos em produtos_filial\n")
 
 # 3. PEDIDO_COMPRA
-
 print("Importando pedido_compra...")
 df = pd.read_excel(ARQUIVO, sheet_name="pedido_compra")
 df.columns = df.columns.str.strip()
-
 df = df.iloc[:, :12]
-df.columns = ["pedido_id","data_pedido","item","produto_id","descricao_produto",
-              "ordem_compra","qtde_pedida","filial_id","data_entrega",
-              "qtde_entregue","preco_compra","fornecedor_id"]
-
+df.columns = ["pedido_id", "data_pedido", "item", "produto_id", "descricao_produto",
+              "ordem_compra", "qtde_pedida", "filial_id", "data_entrega",
+              "qtde_entregue", "preco_compra", "fornecedor_id"]
 inseridos = 0
 for _, row in df.iterrows():
     try:
@@ -124,22 +119,19 @@ for _, row in df.iterrows():
             float(row["preco_compra"]) if pd.notna(row["preco_compra"]) else 0,
             int(row["fornecedor_id"]) if pd.notna(row["fornecedor_id"]) else None
         ))
-        inseridos += 1
+        inseridos += cur.rowcount
     except Exception as e:
         print(f"  Erro pedido_compra linha {_}: {e}")
         conn.rollback()
         continue
-
 conn.commit()
-print(f"  {inseridos} registros inseridos em pedido_compra \n")
-
+print(f"  {inseridos} de {len(df)} registros inseridos em pedido_compra\n")
 
 # 4. ENTRADAS_MERCADORIA
-
 print("Importando entradas_mercadoria...")
 df = pd.read_excel(ARQUIVO, sheet_name="entradas_mercadoria")
 df.columns = df.columns.str.strip()
-
+inseridos = 0
 for _, row in df.iterrows():
     try:
         cur.execute("""
@@ -159,21 +151,19 @@ for _, row in df.iterrows():
             int(row["filial_id"]) if pd.notna(row["filial_id"]) else None,
             float(row["custo_unitario"]) if pd.notna(row["custo_unitario"]) else 0
         ))
+        inseridos += cur.rowcount
     except Exception as e:
         print(f"  Erro entradas_mercadoria linha {_}: {e}")
         conn.rollback()
         continue
-
 conn.commit()
-print(f"  {len(df)} registros inseridos em entradas_mercadoria \n")
-
+print(f"  {inseridos} de {len(df)} registros inseridos em entradas_mercadoria\n")
 
 # 5. VENDA
-
 print("Importando venda...")
 df = pd.read_excel(ARQUIVO, sheet_name="venda")
 df.columns = df.columns.str.strip()
-
+inseridos = 0
 for _, row in df.iterrows():
     try:
         cur.execute("""
@@ -193,17 +183,14 @@ for _, row in df.iterrows():
             int(row["item"]) if pd.notna(row["item"]) else 0,
             str(row["unidade_medida"]).strip() if pd.notna(row["unidade_medida"]) else None
         ))
+        inseridos += cur.rowcount
     except Exception as e:
         print(f"  Erro venda linha {_}: {e}")
         conn.rollback()
         continue
-
 conn.commit()
-print(f"  {len(df)} registros inseridos em venda \n")
-
+print(f"  {inseridos} de {len(df)} registros inseridos em venda\n")
 
 cur.close()
 conn.close()
-print("=" * 40)
-print("Importação concluída com sucesso! ")
-print("=" * 40)
+print("Importação concluída com sucesso!")

@@ -8,7 +8,7 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
+| Izabelly Cantalice Ribeiro Ayder Soares | 2421950 | IzabellyCantalice |
 
 ## O cenário
 
