@@ -1,6 +1,6 @@
 # Equipes
 
-Lista dos alunos e duplas, montada a partir dos forks (atualizada em 10/11/2026, 13h50). O trabalho pode ser **individual ou em dupla**. Cada um preenche a tabela Equipe no README **do próprio fork**. Na dupla, só **um integrante** faz o fork; o outro entra como colaborador.
+Lista dos alunos e duplas, montada a partir dos forks (atualizada em 12/11/2026, 17h40). O trabalho pode ser **individual ou em dupla**. Cada um preenche a tabela Equipe no README **do próprio fork**. Na dupla, só **um integrante** faz o fork; o outro entra como colaborador.
 
 | Formato / dupla | Integrantes (usuário do GitHub) | Fork | Situação |
 | --- | --- | --- | --- |
@@ -12,3 +12,4 @@ Lista dos alunos e duplas, montada a partir dos forks (atualizada em 10/11/2026,
 | Dupla | Sophia Guedes Alves (sophiaguedess), Rayssa Ramos de Sá | [sophiaguedess/bd-integracao-dados-sis242m01](https://github.com/sophiaguedess/bd-integracao-dados-sis242m01) | Nomes só no campo "Nome da dupla"; falta preencher a tabela |
 | a preencher | EmillyMelissa (dona do fork) | [EmillyMelissa/bd-integracao-dados-sis242m01](https://github.com/EmillyMelissa/bd-integracao-dados-sis242m01) | Fork criado; falta preencher a tabela Equipe |
 | Dupla | Carlos Alencar (xandealencar-S, 2400784), Carlos Vasconcelos (Carlos-VasconceloS, 2385765) | [xandealencar-S/bd-integracao-dados-sis242m01](https://github.com/xandealencar-S/bd-integracao-dados-sis242m01) | Tabela preenchida; Pull Request #2 aberto (só com a tabela, trabalho ainda não começou) |
+| Individual | Bruna Isabelle Nunes Muro (BrunaMuro, 2527820) | [brunaisabellye-cloud/bd-integracao-dados-sis242m01](https://github.com/brunaisabellye-cloud/bd-integracao-dados-sis242m01) | Tabela preenchida (nome também no campo "Nome da dupla"); ⚠️ usuário informado (BrunaMuro) não é o dono do fork; sem Pull Request |
