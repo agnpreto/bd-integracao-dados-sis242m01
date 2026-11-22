@@ -30,6 +30,10 @@
 |pedido\_compra, produtos\_filial|Sem chave estrangeira para fornecedor.|FKs escritas no arquivo, comentadas: serão aplicadas depois da importação e da validação.|
 |pedido\_compra|qtde\_pendente é derivável (qtde\_pedida menos qtde\_entregue) e pode ficar inconsistente.|Mantida; a conferência entra na Parte 4.|
 |venda|horariomov é varchar(8) em vez de TIME.|Mantido para não rejeitar horários inválidos na importação; validação na Parte 4.|
+|venda (MySQL)|ERROR 1064: erro de sintaxe perto de '::character varying'. O cast ::character varying nos DEFAULTs só existe no PostgreSQL.|Removi o cast: DEFAULT '00:00:00'.|
+|pedido\_compra, entradas\_mercadoria, fornecedor (MySQL)|ERROR 1049: Unknown database 'public'. No MySQL o prefixo public. é lido como nome de banco, não de esquema.|Removi o prefixo public. e escolhi o banco com USE integracao\_dados.|
+|produtos\_filial (MySQL)|ERROR 1064 perto de 'PRIMARY KEY (filial\_id, idproduto))': mesma causa da vírgula que falta; o PostgreSQL apontava para o "(", o MySQL aponta para o PRIMARY KEY.|Vírgula adicionada, como no PostgreSQL.|
+|produtos\_filial (MySQL)|filial\_id declarado NULL mas usado na PK: o MySQL rejeita com ERROR 1171 (todas as partes de uma PRIMARY KEY devem ser NOT NULL), enquanto o PostgreSQL aceita e força NOT NULL em silêncio.|filial\_id NOT NULL.|
 
 ## Erros encontrados no script de importação e como foram corrigidos
 
