@@ -9,7 +9,7 @@
 **Nome da dupla:** ____________________ (deixe em branco se for individual)
 
 | Nome | Matrícula | Usuário do GitHub |
-| --- | --- | --- |
+| Renê| 2535067 | araujo37 |
 |  |  |  |
 |  |  |  |
 
