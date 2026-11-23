@@ -10,7 +10,7 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-| Bruna Muro | 2527820 | brunaisabellye-cloud |
+| Bruna Muro | 2527820 | brunaisabellye-cloud.com |
 | Emilly Melissa | 2532310 | melissaemilly@icloud.com |
 
 
