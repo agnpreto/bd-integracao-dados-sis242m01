@@ -10,7 +10,7 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-| Franklin Mendonça | (preencher) | franklinmend |
+| Franklin Mendonça | 2385570 | franklinmend |
 
 ## O cenário
 
