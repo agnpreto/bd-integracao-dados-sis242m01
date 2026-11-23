@@ -53,3 +53,47 @@ WHERE p.data_pedido >= DATE '2025-02-01'
 GROUP BY p.produto_id
 HAVING SUM(p.qtde_pedida) > 10
 ORDER BY SUM(p.qtde_pedida) DESC, p.produto_id;
+
+-- 4) Trigger: gera automaticamente um idfornecedor numérico para o produto que chega sem fornecedor.
+-- Funcionamento: antes de inserir em produtos_filial, se idfornecedor vier NULL, a trigger pega o próximo
+-- número da sequência, cria o fornecedor correspondente (razão social provisória, a cadastrar) e preenche
+-- o idfornecedor do produto. A chave estrangeira garante a relação com a tabela fornecedor.
+
+-- Conferência prévia: produtos apontando para fornecedor inexistente (esperado: 0)
+SELECT COUNT(*) AS orfaos
+FROM produtos_filial pf
+LEFT JOIN fornecedor f ON f.idfornecedor = pf.idfornecedor
+WHERE pf.idfornecedor IS NOT NULL AND f.idfornecedor IS NULL;
+
+ALTER TABLE produtos_filial DROP CONSTRAINT IF EXISTS fk_produtos_fornecedor;
+ALTER TABLE produtos_filial
+    ADD CONSTRAINT fk_produtos_fornecedor
+    FOREIGN KEY (idfornecedor) REFERENCES fornecedor (idfornecedor);
+
+-- Sequência alinhada ao maior id existente (o próximo gerado será max + 1)
+CREATE SEQUENCE IF NOT EXISTS seq_idfornecedor;
+SELECT setval('seq_idfornecedor', COALESCE(MAX(idfornecedor), 1), MAX(idfornecedor) IS NOT NULL)
+FROM fornecedor;
+
+CREATE OR REPLACE FUNCTION fn_gera_idfornecedor()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    novo integer;
+BEGIN
+    IF NEW.idfornecedor IS NULL THEN
+        novo := nextval('seq_idfornecedor');
+        INSERT INTO fornecedor (idfornecedor, razao_social)
+        VALUES (novo, 'FORNECEDOR ' || novo || ' - A CADASTRAR');
+        NEW.idfornecedor := novo;
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS trg_produtos_gera_idfornecedor ON produtos_filial;
+CREATE TRIGGER trg_produtos_gera_idfornecedor
+BEFORE INSERT ON produtos_filial
+FOR EACH ROW
+EXECUTE FUNCTION fn_gera_idfornecedor();
