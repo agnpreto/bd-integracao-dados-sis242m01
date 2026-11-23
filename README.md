@@ -6,7 +6,7 @@
 
 ## Equipe
 
-**Nome da dupla:** ____________________ (deixe em branco se for individual)
+**Nome da dupla:** Carlos Alencar e Carlos Vasconcelos (deixe em branco se for individual)
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
