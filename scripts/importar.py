@@ -1,17 +1,30 @@
 import os
+import re
 import pandas as pd
-import psycopg2
 from datetime import datetime, timedelta
 
 # ── Configurações ──────────────────────────────────────────
+# Banco de destino: "postgres" (padrão) ou "mysql". Escolha pela variável de ambiente DB_TIPO.
+TIPO = os.environ.get("DB_TIPO", "postgres").lower()
+
 # O caminho é calculado a partir da pasta do script: funciona de qualquer pasta.
 ARQUIVO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "dados", "base_teste.xlsx")
-DB = {
-    "host": "localhost",
-    "port": 5432,                 # PostgreSQL: 5432 (MySQL: 3306)
-    "database": "integracao_dados",
-    "user": "postgres",
-    "password": os.environ.get("PGPASSWORD", "sua_senha_aqui")  # nunca coloque a senha real aqui
+
+CONFIG = {
+    "postgres": {
+        "host": "localhost",
+        "port": 5432,
+        "database": "integracao_dados",
+        "user": "postgres",
+        "password": os.environ.get("PGPASSWORD", "sua_senha_aqui"),  # nunca coloque a senha real aqui
+    },
+    "mysql": {
+        "host": "localhost",
+        "port": 3306,
+        "database": "integracao_dados",
+        "user": "root",
+        "password": os.environ.get("MYSQL_PWD", "sua_senha_aqui"),  # nunca coloque a senha real aqui
+    },
 }
 
 
@@ -43,14 +56,29 @@ def texto(valor):
     return str(valor).strip() if pd.notna(valor) else None
 
 
+def adaptar(sql):
+    """O SQL é escrito para PostgreSQL. Para MySQL troca o que muda:
+    sem o prefixo public. e com ON DUPLICATE KEY no lugar de ON CONFLICT."""
+    if TIPO != "mysql":
+        return sql
+    sql = sql.replace("public.", "")
+    return re.sub(r"ON CONFLICT \((\w+)[^)]*\) DO NOTHING", r"ON DUPLICATE KEY UPDATE \1 = \1", sql)
+
+
 # ── Conecta no banco ───────────────────────────────────────
-print("Conectando no PostgreSQL...")
-try:
-    conn = psycopg2.connect(**DB)
-except UnicodeDecodeError:
-    # No Windows em português o servidor responde em Windows-1252 e o psycopg2 quebra ao ler o erro.
-    raise SystemExit("Falha ao conectar: confira a senha (variável PGPASSWORD), o usuário e o banco.")
-conn.autocommit = True  # cada linha é gravada sozinha: um erro não desfaz as outras
+if TIPO == "mysql":
+    print("Conectando no MySQL...")
+    import pymysql
+    conn = pymysql.connect(**CONFIG["mysql"], charset="utf8mb4", autocommit=True)
+else:
+    print("Conectando no PostgreSQL...")
+    import psycopg2
+    try:
+        conn = psycopg2.connect(**CONFIG["postgres"])
+    except UnicodeDecodeError:
+        # No Windows em português o servidor responde em Windows-1252 e o psycopg2 quebra ao ler o erro.
+        raise SystemExit("Falha ao conectar: confira a senha (variável PGPASSWORD), o usuário e o banco.")
+    conn.autocommit = True  # cada linha é gravada sozinha: um erro não desfaz as outras
 cur = conn.cursor()
 print("Conectado!\n")
 
@@ -60,7 +88,7 @@ def importar(nome, df, sql, montar):
     inseridas = duplicadas = erros = 0
     for i, row in df.iterrows():
         try:
-            cur.execute(sql, montar(row))
+            cur.execute(adaptar(sql), montar(row))
             if cur.rowcount == 1:
                 inseridas += 1
             else:
@@ -196,7 +224,7 @@ print("Conferência final (planilha x banco):")
 diferencas = 0
 for aba in ["fornecedor", "produtos_filial", "pedido_compra", "entradas_mercadoria", "venda"]:
     na_planilha = len(pd.read_excel(ARQUIVO, sheet_name=aba))
-    cur.execute(f"SELECT COUNT(*) FROM public.{aba}")
+    cur.execute(adaptar(f"SELECT COUNT(*) FROM public.{aba}"))
     no_banco = cur.fetchone()[0]
     aviso = "" if na_planilha == no_banco else "   <-- DIFERENTE"
     diferencas += 0 if na_planilha == no_banco else 1

@@ -2,7 +2,7 @@
 
 ## Ferramenta utilizada
 
-A importação foi feita pelo script `scripts/importar.py` (Python 3 com `pandas`, `openpyxl` e `psycopg2`). Ele lê as 5 abas de `dados/base_teste.xlsx` e grava no PostgreSQL local, no banco `integracao_dados`. O DBeaver foi usado para criar o banco, executar os DDLs corrigidos (`sql/01_ddl_postgres.sql` e `sql/01_ddl_mysql.sql`) e conferir os dados com consultas SQL.
+A importação foi feita pelo script `scripts/importar.py` (Python 3 com `pandas`, `openpyxl`, `psycopg2` e `pymysql`). Ele lê as 5 abas de `dados/base_teste.xlsx` e grava no banco escolhido pela variável `DB_TIPO`: PostgreSQL (padrão) ou MySQL, ambos locais, no banco `integracao_dados`. O DBeaver foi usado para criar os bancos, executar os DDLs corrigidos (`sql/01_ddl_postgres.sql` e `sql/01_ddl_mysql.sql`) e conferir os dados com consultas SQL.
 
 ## Estrutura da planilha
 
@@ -91,26 +91,9 @@ A importação foi feita pelo script `scripts/importar.py` (Python 3 com `pandas
 | Valores ausentes viravam valores falsos em silêncio (`else 1` e `else 0` em filial_id, item e ordem_compra) | Dado ausente entraria como filial 1, item 0 ou ordem 0 sem aviso | Valores padrão removidos das colunas de chave: dado ausente gera erro visível |
 | Identificadores convertidos com `float()` | Resquício dos float8 do DDL antigo; chave imprecisa | `int()` nos identificadores |
 | Caminho relativo `dados/base_teste.xlsx` | Só funcionava com o terminal na raiz do repositório | Caminho calculado a partir da pasta do script |
+| Script só gravava no PostgreSQL (`psycopg2`) e o comentário citava a porta "3006" para o MySQL | O MySQL (porta 3306) ficava sem dados | Variável `DB_TIPO` escolhe o destino. Para MySQL usa `pymysql`, e a função `adaptar()` remove o prefixo `public.` e troca `ON CONFLICT` por `ON DUPLICATE KEY UPDATE` (evitei `INSERT IGNORE`, que esconde erros de dado) |
 
 ## Tratamentos aplicados aos dados
 
 - **Conversão de tipos:** datas do Excel para `date`; identificadores para inteiro; quantidades e preços para `numeric`; textos sem espaços nas pontas.
-- **Código do fornecedor:** prefixo "F" removido em `fornecedor` e `produtos_filial` (F8 vira 8), para casar com `pedido_compra.fornecedor_id` e com o tipo inteiro do DDL.
-- **Mapeamento de coluna:** `idproduto` da planilha gravado em `produto_id`.
-- **Colunas ignoradas:** as 99 células soltas das colunas M a W de `pedido_compra`. Só as colunas A a L são lidas.
-- **Coluna calculada:** `qtde_pendente` não existe na planilha e é calculada como `qtde_pedida` menos `qtde_entregue`.
-- **Valores ausentes:** estoque e preços ausentes virariam 0, como no DDL. A planilha não tem nenhuma célula vazia nas colunas lidas.
-- **Validações:** inserção com `ON CONFLICT DO NOTHING` pelas chaves primárias (nenhuma linha duplicada foi ignorada) e contagem planilha x banco no fim do script.
-- **Dados mantidos como vieram:** erros de conteúdo (datas invertidas, ordem de compra 0, quantidades divergentes) não foram alterados. Estão listados na Parte 4, porque a correção depende do cliente.
-
-## Conferência final
-
-| Tabela | Linhas na planilha | Linhas no banco |
-| --- | --- | --- |
-| fornecedor | 20 | 20 |
-| produtos_filial | 20 | 20 |
-| pedido_compra | 29 | 29 |
-| entradas_mercadoria | 20 | 20 |
-| venda | 33 | 33 |
-
-Conferência feita no PostgreSQL, pelo próprio script ao final da importação.
+-
