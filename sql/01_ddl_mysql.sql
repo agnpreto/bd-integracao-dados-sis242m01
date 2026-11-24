@@ -1,4 +1,4 @@
--- DDL corrigido (MySQL 8 / MariaDB 10.6+)
+﻿-- DDL corrigido (MySQL 8 / MariaDB 10.6+)
 -- Mesmas correções do PostgreSQL, adaptadas: sem prefixo public., sem cast ::,
 -- AUTO_INCREMENT no lugar de IDENTITY, BIGINT/DECIMAL no lugar de int8/float8.
 -- Revisão (2ª versão): mesmas mudanças do 01_ddl_postgres.sql (DECIMAL nas
