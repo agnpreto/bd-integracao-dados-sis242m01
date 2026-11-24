@@ -1,4 +1,4 @@
--- DDL corrigido (PostgreSQL)
+﻿-- DDL corrigido (PostgreSQL)
 -- Correções em relação a sql/01_ddl_enunciado.sql:
 --  * entradas_mercadoria: coluna ordem_compra adicionada (a PK a referenciava, mas ela não existia)
 --  * produtos_filial: vírgula faltando antes do CONSTRAINT; PK usava idproduto (o correto é produto_id)
