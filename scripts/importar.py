@@ -2,7 +2,6 @@ import pandas as pd
 import psycopg2
 from datetime import datetime, timedelta
 
-# ── Configurações ──────────────────────────────────────────
 ARQUIVO = "dados/base_teste.xlsx"  #trocar caminho do dataset dos Senhores
 DB = {
     "host": "localhost", #de acordo com o host do SGBD dos Senhores
@@ -12,7 +11,6 @@ DB = {
     "password": "1234"   #senha do utilizador
 }
 
-# ── Converte serial do Excel para data ─────────────────────
 def excel_para_data(valor):
     try:
         if pd.isna(valor):
@@ -21,15 +19,11 @@ def excel_para_data(valor):
     except:
         return None
 
-# ── Conecta no banco ───────────────────────────────────────
 print("Conectando no PostgreSQL...")
 conn = psycopg2.connect(**DB)
 cur = conn.cursor()
 print("Conectado!\n")
 
-
-
-# 1. FORNECEDOR
 
 print("Importando fornecedor...")
 df = pd.read_excel(ARQUIVO, sheet_name="fornecedor")
@@ -53,8 +47,6 @@ for _, row in df.iterrows():
 conn.commit()
 print(f"  {len(df)} registros inseridos em fornecedor \n")
 
-
-# 2. PRODUTOS_FILIAL
 
 print("Importando produtos_filial...")
 df = pd.read_excel(ARQUIVO, sheet_name="produtos_filial")
@@ -86,8 +78,6 @@ for _, row in df.iterrows():
 conn.commit()
 print(f"  {len(df)} registros inseridos em produtos_filial \n")
 
-
-# 3. PEDIDO_COMPRA
 
 print("Importando pedido_compra...")
 df = pd.read_excel(ARQUIVO, sheet_name="pedido_compra")
@@ -134,8 +124,6 @@ conn.commit()
 print(f"  {inseridos} registros inseridos em pedido_compra \n")
 
 
-# 4. ENTRADAS_MERCADORIA
-
 print("Importando entradas_mercadoria...")
 df = pd.read_excel(ARQUIVO, sheet_name="entradas_mercadoria")
 df.columns = df.columns.str.strip()
@@ -167,8 +155,6 @@ for _, row in df.iterrows():
 conn.commit()
 print(f"  {len(df)} registros inseridos em entradas_mercadoria \n")
 
-
-# 5. VENDA
 
 print("Importando venda...")
 df = pd.read_excel(ARQUIVO, sheet_name="venda")
