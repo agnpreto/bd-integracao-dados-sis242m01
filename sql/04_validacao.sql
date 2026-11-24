@@ -1,5 +1,5 @@
 -- =====================================================================
--- Parte 4 - Consultas de validação (fevereiro/2025) e catálogo de erros.
+-- Parte 4 - Consultas de validação da integridade dos dados importados (fevereiro/2025) e catálogo de erros.
 -- Roda em PostgreSQL e MySQL 8. Cada item E# tem o roteiro em
 -- docs/parte4_validacao.md. Resultado vazio = tudo certo naquele teste.
 -- =====================================================================
