@@ -7,9 +7,9 @@ ARQUIVO = "dados/base_teste.xlsx"  #trocar caminho do dataset dos Senhores
 DB = {
     "host": "localhost", #de acordo com o host do SGBD dos Senhores
     "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3006
-    "database": "postgres", #nome da data base do Senhores
-    "user": "postgres",   #utilizador dos senhores 
-    "password": "1234"   #senha do utilizador
+    "database": "shunichi", #nome da data base do Senhores
+    "user": "shunichi",   #utilizador dos senhores 
+    "password": "123"   #senha do utilizador
 }
 
 # ── Converte serial do Excel para data ─────────────────────
