@@ -58,3 +58,4 @@ Ver `sql/04_validacao.sql`. Para a reunião, a ordem sugerida é C1, C2, C3, C4,
 | E19 | Nome de coluna diferente do DDL: `idproduto` (planilha) x `produto_id` (DDL) | 1 | estrutura |
 
 Observação: algumas linhas contam em mais de um erro.
+> Revisão final da etapa de validação concluída para entrega individual.
