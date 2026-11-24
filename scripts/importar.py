@@ -92,6 +92,8 @@ def numero(v, campo):
     except ValueError:
         raise LinhaInvalida(f"{campo} não numérico: {v!r}")
 
+        conn.commit()
+        print(f"  {inseridos} registros inseridos em produtos_filial (total no Excel: {len(df)})\n")
 
 def inteiro(v, campo):
     n = numero(v, campo)
@@ -142,12 +144,41 @@ def hora(v, campo):
     except ValueError:
         raise LinhaInvalida(f"{campo} não é uma hora válida: {v!r}")
 
+        # 4. ENTRADAS_MERCADORIA
+        print("Importando entradas_mercadoria...")
+        df = pd.read_excel(ARQUIVO, sheet_name="entradas_mercadoria")
+        df.columns = df.columns.str.strip()
+        inseridos = 0
 
 def obrigatorio(valor, campo):
     if valor is None:
         raise LinhaInvalida(f"{campo} vazio")
     return valor
 
+                cur.execute(
+                    """
+                    INSERT INTO public.venda
+                        (venda_id, data_emissao, horariomov, produto_id,
+                         qtde_vendida, valor_unitario, filial_id, item, unidade_medida)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    ON CONFLICT (filial_id, venda_id, data_emissao, produto_id, item, horariomov) DO NOTHING
+                    """,
+                    (
+                        venda_id,
+                        data_emissao,
+                        str(row["horariomov"]).strip() if pd.notna(row.get("horariomov")) else "00:00:00",
+                        str(row["produto_id"]).strip() if pd.notna(row.get("produto_id")) else "",
+                        para_float(row.get("qtde_vendida")),
+                        para_float(row.get("valor_unitario"), 0.0),
+                        para_int(row.get("filial_id"), 1),
+                        para_int(row.get("item"), 0),
+                        str(row["unidade_medida"]).strip() if pd.notna(row.get("unidade_medida")) else None,
+                    ),
+                )
+                inseridos += cur.rowcount
+            except Exception as e:
+                print(f"  Erro venda linha {idx}: {e}")
+                conn.rollback()
 
 # ---------------------------------------------------------------- conversão linha -> registro
 def reg_fornecedor(r):
