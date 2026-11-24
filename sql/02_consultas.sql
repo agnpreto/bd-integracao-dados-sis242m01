@@ -1,3 +1,3 @@
 -- 02_consultas
--- Nome:
+-- Nome:Consulta sql basica
 
