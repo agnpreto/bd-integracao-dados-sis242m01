@@ -6,12 +6,12 @@
 
 ## Equipe
 
-**Nome da dupla:** ____________________ (deixe em branco se for individual)
+**Nome da dupla:** Miguel e Ian (deixe em branco se for individual)
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Miguel Menezes | `2537449` | `miguelrcmenezes-cell` |
+| Ian Shunichi | `2538587` | `shunichitaka` |
 
 ## O cenário
 
