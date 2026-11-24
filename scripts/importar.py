@@ -24,6 +24,7 @@ ENGINE = ap.parse_args().engine
 
 
 def conectar():
+    """Estabelece a ligação com PostgreSQL ou MySQL via variáveis de ambiente."""
     host = os.environ.get("DB_HOST", "localhost")
     if ENGINE == "postgres":
         import psycopg2
