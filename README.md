@@ -1,3 +1,4 @@
+
 # Integração de Dados: implantação, consultas e validação
 
 **Disciplina:** Banco de Dados (SIS242M01)  
@@ -10,8 +11,7 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Renison Carlos Brilhante Ribeiro Júnior | 2535023 | renisonjunior |
 
 ## O cenário
 
