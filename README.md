@@ -10,8 +10,7 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Franklin Mendonça | 2385570 | franklinmend |
 
 ## O cenário
 
