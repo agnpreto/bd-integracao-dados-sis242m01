@@ -6,12 +6,12 @@
 
 ## Equipe
 
-**Nome da dupla:** ____________________ (deixe em branco se for individual)
+**Nome da dupla:** Carlos Alencar e Carlos Vasconcelos (deixe em branco se for individual)
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Carlos Alencar | 2400784 | xandealencar-S |
+| Carlos Vasconcelos | 2385765 | Carlos-Vasconcel0S |
 
 ## O cenário
 
