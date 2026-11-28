@@ -6,12 +6,11 @@
 
 ## Equipe
 
-**Nome da dupla:** ____________________ (deixe em branco se for individual)
+**Nome da dupla:** Rayssa Ramos e Sophia Guedes
 
 | Nome | Matrícula | Usuário do GitHub |
-| --- | --- | --- |
-|  |  |  |
-|  |  |  |
+Sophia Guedes Alves, 2530967, sophiaguedess
+Rayssa Ramos de Sá, 2528165, rayssa-sa
 
 ## O cenário
 
