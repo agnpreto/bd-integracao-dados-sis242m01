@@ -6,12 +6,12 @@
 
 ## Equipe
 
-**Nome da dupla:** ____________________ (deixe em branco se for individual)
+**Nome da dupla:** Bruna Isabelle Nunes Muro
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Bruna Muro | 2527820 | BrunaMuro |
+| Emilly Melissa | 2532310 | EmillyMelissa |
 
 ## O cenário
 
