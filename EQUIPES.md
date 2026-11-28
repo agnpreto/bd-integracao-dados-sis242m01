@@ -3,7 +3,7 @@
 Lista dos alunos e duplas, montada a partir dos forks (atualizada em 25/11/2026, 07h50). O trabalho pode ser **individual ou em dupla**. Cada um preenche a tabela Equipe no README **do próprio fork**. Na dupla, só **um integrante** faz o fork; o outro entra como colaborador.
 
 | Formato / dupla | Integrantes (usuário do GitHub) | Fork | Situação |
-| --- | --- | --- | --- |
+
 | Individual | Izabelly Cantalice Ribeiro Ayder Soares (IzabellyCantalice) | [IzabellyCantalice/bd-integracao-dados-sis242m01](https://github.com/IzabellyCantalice/bd-integracao-dados-sis242m01) | Pull Request #1 aberto |
 | Dupla | Mikael Coelho Ramos (mikaelrms, 2388326), Kauã Monteiro Coelho (Kauaks, 2533406) | [mikaelrms/bd-integracao-dados-sis242m01](https://github.com/mikaelrms/bd-integracao-dados-sis242m01) | Tabela preenchida; Pull Request #3 com a Parte 1 em 20/11; em 23/11 (19h28–20h55) o Kauã enviou as Partes 2 e 3 (com trigger) e o `sql/04_validacao.sql` (5 commits dele); tabela e contagens no PR ✅; ⚠️ falta `docs/parte4_validacao.md` (igual ao modelo) |
 | Dupla | Carlos Alexandre Dias Messias de Lima (Alexandrediasss, 2423449), Maria Luiza Oliveira Teodoro (MariaLuiza007-Teo, 2538557) | [Alexandrediasss/bd-integracao-dados-sis242m01](https://github.com/Alexandrediasss/bd-integracao-dados-sis242m01) | Tabela preenchida; Pull Request #4 aberto em 21/11 com todas as partes (checklist completo, os dois com pelo menos 3 commits) |

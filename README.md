@@ -10,8 +10,8 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Harrison Ambrozio | 2534655 | HarrisonAmbrosio | 
+| Fernando Filho | 2536250 | Nanduou |
 
 ## O cenário
 
